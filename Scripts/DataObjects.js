@@ -8,7 +8,7 @@ function DataObjects(Game, Variable, Value) {
 		"5": "Max"
 	};
 	// Check if the correct variable type gets entered.
-	/*f ((Variable === "0") || (Variable === "2") || (Variable === "3")) {
+	if ((Variable === "0") || (Variable === "2") || (Variable === "3")) {
 		if ((typeof prs(Value)) !== "boolean") {
 			return resp = "{redirect:296318607112142848}`" + Value + "` is type of *" + (typeof prs(Value)) + "*, Expected type of *Boolean*.";
 		}
@@ -22,7 +22,7 @@ function DataObjects(Game, Variable, Value) {
 		if ((typeof Value) !== "string") {
 			return resp = "{redirect:296318607112142848}`" + Value + "` is type of *" + (typeof Value) + "*, Expected type of *String*.";
 		}
-	}*/
+	}
 	var Objects = {
 		"Hangman": {
 			"DevMode": false,
