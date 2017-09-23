@@ -48,6 +48,14 @@ function DataObjects(Game, Variable, Value) {
 			"Players": 0,
 			"Max": 2
 		},
+		"Poker": {
+			"DevMode": false,
+			"Temp": "",
+			"Game": false,
+			"Started": false,
+			"Players": 0,
+			"Max": 9
+		},
 		"Slotmachine": {
 			"DevMode": false
 		},
