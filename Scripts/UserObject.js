@@ -42,7 +42,7 @@ function UserObject(CurrentObject, City, Cash, Bank, Experience, Level, Game) {
   } else {
     obj["Level"] = prs(CurrentObject)["Level"];
   }
-  if (City !== "") {
+  if (Game !== "") {
     obj["Game"] = City;
   } else if (Game === "Reset") {
     obj["Game"] = "";

@@ -28,11 +28,13 @@ sendWelcomeBack={init}
 #js >>
 use echonia;
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/UserObject.js";
 var txt = "{pm}Welcome back to Echonia *" + Username + "*.\nYou can continue straight away from where you left Echonia.";
 if (prs(echonia[UserID])["Game"] !== "") {
 	txt += "\nYour data shows you were playing a game so that data has been reset for you.";
-} else if (prs(echonia[UserID])["City"] !== "Echonia Castle") {
+	echonia[UserID] = UserObject(echonia[UserID], "", "", "", "", "", "Reset");
+}
+if (prs(echonia[UserID])["City"] !== "Echonia Castle") {
 	txt += "\n{role:" + prs(echonia[UserID])["City"] + "}";
 }
 resp = txt;
