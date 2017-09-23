@@ -4,7 +4,7 @@ jnEvent={init}
 #js >>
 use echonia;
 if (echonia[UserID]) {
-	resp = "{redirect:296318607112142848}\n*{user}* has returned to Echonia.\n{ars:sendWelcomeBack}";
+	resp = "{redirect:296318607112142848}\n*{user}* has returned to Echonia.\n{role:Gamer}\n{ars:sendWelcomeBack}";
 } else {
 	resp = "{redirect:296318607112142848}\n*{user}* has decided to visit Echonia!\n{role:Unregistered}\n{ars:sendRegister}";
 }
@@ -21,6 +21,21 @@ if (register[UserID]) {
 } else {
 	resp = "{redirect:296318607112142848}*{/user}* has left Echonia behind...";
 }
+>>
+[#CONTINUE#]
+sendWelcomeBack={init}
+{arslock}
+#js >>
+use echonia;
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+var txt = "{pm}Welcome back to Echonia *" + Username + "*.\nYou can continue straight away from where you left Echonia.";
+if (prs(echonia[UserID])["Game"] !== "") {
+	txt += "\nYour data shows you were playing a game so that data has been reset for you.";
+} else if (prs(echonia[UserID])["City"] !== "Echonia Castle") {
+	txt += "\n{role:" + prs(echonia[UserID])["City"] + "}";
+}
+resp = txt;
 >>
 [#CONTINUE#]
 sendRegister={init}
@@ -68,7 +83,7 @@ if (ChannelID == "360835773043441666") {
 			};
 			obj = JSON.stringify(obj);
 			echonia[UserID] = obj;
-			resp = "{del}\n" + "{" + "pm" + "}\nThank you for registering.\nI have some money for you to settle in Echonia.\nI wish you best of luck.\n{role:Gamer}\n{take:Unregistered}";
+			resp = "{del}\n" + "{" + "pm" + "}\nThank you for registering.\nI have some money for you to settle in Echonia.\nI wish you best of luck.\n{role:Gamer}{ars:takeUR}";
 		} else {
 			resp = "{del}" + "{" + "pm" + "}My data says I did make a code for you but it is not the one you just gave me. Try again.";
 		}
@@ -76,11 +91,15 @@ if (ChannelID == "360835773043441666") {
 }
 >>
 [#CONTINUE#]
+takeUR={init}
+{arslock}
+{take:Unregistered}
+[#CONTINUE#]
 e?info={init}
 #js >>
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Info.js";
-resp = Info().replace(/\\\\n/g, "\n");
+resp = Info().replace(/\n/g, "\n");
 >>
 [#CONTINUE#]
 gm?setdata={init}
