@@ -80,7 +80,7 @@ e?info={init}
 #js >>
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Info.js";
-resp = Info();
+resp = Info().replace(/\\\\n/g, "\n");
 >>
 [#CONTINUE#]
 gm?setdata={init}
