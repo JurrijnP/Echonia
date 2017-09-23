@@ -1,0 +1,12 @@
+e?info={init}
+#js >>
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Info.js";
+resp = Info().replace(/\n/g, "\n");
+>>
+[#CONTINUE#]
+e?games={init}
+#js >>
+//import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
+//resp = Games().replace(/\n/g, "\n");
+>>
