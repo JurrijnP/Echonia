@@ -10,3 +10,66 @@ e?games={init}
 //import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
 //resp = Games().replace(/\n/g, "\n");
 >>
+[#CONTINUE#]
+&gm?devmode {params}={init}
+{req:Game Master}
+#js >>
+use MainData;
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
+var Games = ["Hangman", "Yahtzee", "Battleships", "Slotmachine", "Horse Race"];
+var Game = Params.replace(/\s(false|true)/g, "");
+var Re = RegExp(Game + "\s", "g");
+var Bool = Params.replace(Re, "");
+if (Games.indexOf(Game) > -1) {
+	MainData[Game] = DataObjects(Game, 0, Bool);
+	MainData["EmbedUpdate"] = Game;
+	if (Bool === true) {
+		resp = "*" + Game + "* has succesfully been set to Developer Mode.\n{ars:gameEmbeds}";
+	} else if (Bool === false) {
+		resp = "*" + Game + "* has succesfully been set to Public Mode.\n{ars:gameEmbeds}";
+	}
+} else {
+	resp = "*" + Game + "* is not a Game.";
+}
+[#CONTINUE#]
+gameEmbeds={init}
+{arslock}
+#js >>
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/GameEmbeds.js";
+use MainData;
+var Edit = UpdateEmbed(MainData["EmbedUpdate"]);
+resp = Edit.replace(/\n/g, "\n");
+>>
+[#CONTINUE#]
+e?hangman={init}
+{req:Sanctuary Halls}
+#js >>
+use MainData;
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
+if (prs(MainData["Hangman"])["DevMode"] === false) {
+	if (prs(MainData["Hangman"])["Game"] === false && prs(MainData["Hangman"])["Temp"] === "") {
+		resp = "*<@" + UserID + ">* do you want to start a game of hangman?\n{ars:HSniffer}";
+		MainData["Hangman"] = DataObjects("Hangman", 1, UserID);
+	}
+} else if (MainData["DevIds"].indexOf(UserID) > -1) {
+	resp = "*<@" + UserID + ">* do you want to start a game of hangman?\n{ars:HSniffer}";
+	MainData["Hangman"] = DataObjects("Hangman", 1, UserID);
+} else {
+	resp = "*<@" + UserID + ">* sorry but hangman is currently under construction. Try again later!";
+}
+>>
+[#CONTINUE#]
+HSniffer={init}
+{arslock}
+{sleep:1m}
+#js >>
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
+use MainData;
+if (prs(MainData["Hangman"])["Temp"] !== "") {
+	MainData["Hangman"] = DataObjects("Hangman", 1, "");
+}
+>>
