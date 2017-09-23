@@ -11,27 +11,24 @@ e?games={init}
 //resp = Games().replace(/\n/g, "\n");
 >>
 [#CONTINUE#]
-&gm?devmode {params}={init}
+&gm?setdata {params}={init}
 {req:Game Master}
 #js >>
 use MainData;
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 var Games = ["Hangman", "Yahtzee", "Battleships", "Slotmachine", "Horse Race"];
-var Game = Params.replace(/\s(false|true)/g, "");
-var Re = RegExp(Game + "\s", "g");
-var Bool = Params.replace(Re, "");
+var Game = Params.replace(/(.+?)\s([0-5])\s(.+)$/g, `\$1`);
+var Variable = Params.replace(/(.+?)\s([0-5])\s(.+)$/g, `\$2`);
+var Value = Params.replace(/(.+?)\s([0-5])\s(.+)$/g, `\$3`);
 if (Games.indexOf(Game) > -1) {
-	MainData[Game] = DataObjects(Game, 0, Bool);
+	MainData[Game] = DataObjects(Game, Variable, Value);
 	MainData["EmbedUpdate"] = Game;
-	if (Bool === true) {
-		resp = "*" + Game + "* has succesfully been set to Developer Mode.\n{ars:gameEmbeds}";
-	} else if (Bool === false) {
-		resp = "*" + Game + "* has succesfully been set to Public Mode.\n{ars:gameEmbeds}";
-	}
+	resp = "*" + Variable + "* has succesfully updated for *" + Game + "*.\n{ars:gameEmbeds}";
 } else {
-	resp = "*" + Game + "* is not a Game.";
+	resp = "*" + Game + "* is not a Game.\nType `gm?data` to view options.";
 }
+>>
 [#CONTINUE#]
 gameEmbeds={init}
 {arslock}
