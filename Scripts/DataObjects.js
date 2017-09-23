@@ -58,7 +58,11 @@ function DataObjects(Game, Variable, Value) {
 		}
 	};
 	var obj = Objects[Game];
-	obj[(Options[Variable])] = Value;
+	if (((typeof prs(Value)) === "number") || ((typeof prs(Value)) === "boolean")) {
+		obj[(Options[Variable])] = prs(Value);
+	} else {
+		obj[(Options[Variable])] = Value;
+	}
 	obj = str(obj);
 	return obj;
 }

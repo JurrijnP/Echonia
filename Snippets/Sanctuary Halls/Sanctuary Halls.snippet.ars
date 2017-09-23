@@ -18,9 +18,9 @@ use MainData;
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 var Games = ["Hangman", "Yahtzee", "Battleships", "Slotmachine", "Horse Race"];
-var Game = Params.replace(/(.+?)\s([0-5])\s(.+)$/g, `\$1`);
-var Variable = Params.replace(/(.+?)\s([0-5])\s(.+)$/g, `\$2`);
-var Value = Params.replace(/(.+?)\s([0-5])\s(.+)$/g, `\$3`);
+var Game = Params.replace(/\s([0-5])\s(.+)$/g, "");
+var Variable = Params.replace(/(^([^0-5]+)\s)|(\s([^0-5]+)$)/g, "");
+var Value = Params.replace(/(.+?)\s([0-5])\s/g, "");
 if (Games.indexOf(Game) > -1) {
 	MainData[Game] = DataObjects(Game, Variable, Value);
 	MainData["EmbedUpdate"] = Game;
