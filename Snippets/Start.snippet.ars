@@ -78,8 +78,8 @@ if (ChannelID == "360835773043441666") {
 [#CONTINUE#]
 e?info={init}
 #js >>
-import "https://raw.githubusercontent.com/JurrijnP/EchoniaJS/master/strings.js";
-import "https://raw.githubusercontent.com/JurrijnP/EchoniaJS/master/Info.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Info.js";
 resp = Info();
 >>
 [#CONTINUE#]
@@ -105,9 +105,9 @@ if ((UserID === "167717172343209984") || (UserID === "181536513631191050") || (U
 {del}
 #js >>
 use echonia;
-import "https://raw.githubusercontent.com/JurrijnP/EchoniaJS/master/strings.js";
-import "https://raw.githubusercontent.com/JurrijnP/EchoniaJS/master/UserObject.js";
-import "https://raw.githubusercontent.com/JurrijnP/EchoniaJS/master/GetRoleName.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/UserObject.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/GetRoleName.js";
 var Response = "{delme:10s}\n";
 var DesText = "";
 var Destination = "";
