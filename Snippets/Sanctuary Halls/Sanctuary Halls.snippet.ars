@@ -17,7 +17,7 @@ e?games={init}
 use MainData;
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
-var Games = ["Hangman", "Yahtzee", "Battleships", "Slotmachine", "Horse Race"];
+var Games = ["Hangman", "Yahtzee", "Battleships", "Slotmachine", "Horse Race", "Poker"];
 var Game = Params.replace(/\s([0-5])\s(.+)$/g, "");
 var Variable = Params.replace(/(^([^0-5]+)\s)|(\s([^0-5]+)$)/g, "");
 var Value = Params.replace(/(.+?)\s([0-5])\s/g, "");

@@ -21,7 +21,7 @@ function UpdateEmbed(Game) {
 			"Banner": "Poker.jpg"
 		}
 	};
-	return var Message = "{edit:" + GameEmbeds[Game]["Message"] + "}\n{embed:\
+	var Message = "{edit:" + GameEmbeds[Game]["Message"] + "}\n{embed:\
 {type:rich}\
 {color:" + GameEmbeds[Game]["Color"] + "}\
 {title:" + Game + "}\
@@ -34,4 +34,5 @@ Under Development: " + prs(MainData[Game])["DevMode"] + "\
 }\
 {image|url:https://raw.githubusercontent.com/JurrijnP/Echonia/master/Game%20Banners/" + GameEmbeds[Game]["Banner"] + "}\
 }";
+return Message;
 }
