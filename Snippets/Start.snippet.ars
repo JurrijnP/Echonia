@@ -1,0 +1,172 @@
+jnEvent={init}
+{protect}
+{Event:Join}
+#js >>
+use echonia;
+if (echonia[UserID]) {
+	resp = "{redirect:296318607112142848}\n*{user}* has returned to Echonia.\n{ars:sendWelcomeBack}";
+} else {
+	resp = "{redirect:296318607112142848}\n*{user}* has decided to visit Echonia!\n{role:Unregistered}\n{ars:sendRegister}";
+}
+>>
+[#CONTINUE#]
+lvEvent={init}
+{protect}
+{Event:Leave}
+#js >>
+use register;
+if (register[UserID]) {
+	delete register[UserID];
+	resp = "{redirect:296318607112142848}*{/user}* did not register and was forced to leave Echonia.";
+} else {
+	resp = "{redirect:296318607112142848}*{/user}* has left Echonia behind...";
+}
+>>
+[#CONTINUE#]
+sendRegister={init}
+{arslock}
+{pm}
+**Important Letter**
+**To:** *{self}*
+Welcome *{self}* to Echonia.
+I, the king of Echonia wants to keep track who visits and leaves.
+According to my data you haven't registered yourself yet at my castle.
+Here is a special code for you only to register. Once you register you can access Echonia. There will also be some money for you to settle here.\n\n\
+Oh then there is one more thing: My patience is not endless so you have 1 minute to register otherwise you will have to leave Echonia.
+#js >>
+use register;
+register[UserID] = Math.floor(Math.random() * 8999) + 1000;
+resp = "Your special code: *" + register[UserID] + "*";
+>>
+{ars:registerSniffer}
+[#CONTINUE#]
+registerSniffer={init}
+{arslock}
+{sleep:1m}
+#js >>
+use register;
+if (register[UserID]) {
+	resp = "{pm}Sorry time's up you will have to leave Echonia now.\n{kick}";
+};
+>>
+[#CONTINUE#]
+&e?register {params}={init}
+#js >>
+use register;
+use echonia;
+if (ChannelID == "360835773043441666") {
+	if (register[UserID]) {
+		if (Params === register[UserID]) {
+			delete register[UserID];
+			var obj = {
+				"City": "Echonia Castle",
+				"Cash": 50,
+				"Bank": 2000,
+				"Experience": 0,
+				"Level": 1,
+				"Game": ""
+			};
+			obj = JSON.stringify(obj);
+			echonia[UserID] = obj;
+			resp = "{del}\n" + "{" + "pm" + "}\nThank you for registering.\nI have some money for you to settle in Echonia.\nI wish you best of luck.\n{role:Gamer}\n{take:Unregistered}";
+		} else {
+			resp = "{del}" + "{" + "pm" + "}My data says I did make a code for you but it is not the one you just gave me. Try again.";
+		}
+	}
+}
+>>
+[#CONTINUE#]
+e?info={init}
+#js >>
+import "https://raw.githubusercontent.com/JurrijnP/EchoniaJS/master/strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/EchoniaJS/master/Info.js";
+resp = Info();
+>>
+[#CONTINUE#]
+gm?setdata={init}
+#js >>
+use echonia;
+if ((UserID === "167717172343209984") || (UserID === "181536513631191050") || (UserID === "146046383726657536")) {
+	var obj = {
+		"City": "Echonia Castle",
+		"Cash": "∞",
+		"Bank": "∞",
+		"Experience": "∞",
+		"Level": "∞",
+		"Game": ""
+	};
+	obj = JSON.stringify(obj);
+	echonia[UserID] = obj;
+	resp = "Data succesfully set for game master, *<@" + UserID + ">*.\n" + obj;
+}
+>>
+[#CONTINUE#]
+&e?travel {params}={init}
+{del}
+#js >>
+use echonia;
+import "https://raw.githubusercontent.com/JurrijnP/EchoniaJS/master/strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/EchoniaJS/master/UserObject.js";
+import "https://raw.githubusercontent.com/JurrijnP/EchoniaJS/master/GetRoleName.js";
+var Response = "{delme:10s}\n";
+var DesText = "";
+var Destination = "";
+var Roles = "\n";
+if (RegExp("(Sanctuary)|(Sanctuary(\s|-|)Halls)", "ig").test(Params)) {
+	DesText = "*" + Username + "*, You have travelled to Sanctuary Halls.";
+	Destination = "Sanctuary Halls";
+	echonia[UserID] = UserObject(echonia[UserID], "Sanctuary Halls", "", "", "", "", "");
+} else if (RegExp("(Orion)|(Orion(\s|-|)City)", "ig").test(Params)) {
+	DesText = "*" + Username + "*, You have travelled to Orion City.";
+	Destination = "Orion City";
+	echonia[UserID] = UserObject(echonia[UserID], "Orion City", "", "", "", "", "");
+}  else if (RegExp("(Bastian)|(Bastian(\s|-|)Castle)", "ig").test(Params)) {
+	DesText = "*" + Username + "*, You have travelled to Bastian Castle.";
+	Destination = "Bastian Castle";
+	echonia[UserID] = UserObject(echonia[UserID], "Bastian Castle", "", "", "", "", "");
+} else if (RegExp("(Echonia)|(Echonia(\s|-|)Castle)", "ig").test(Params)) {
+	if (prs(echonia[UserID])["City"] !== "Echonia Castle") {
+		DesText = "*" + Username + "*, You have travelled back to Echonia.";
+		Destination = "Echonia";
+		echonia[UserID] = UserObject(echonia[UserID], "Echonia Castle", "", "", "", "", "");
+	} else {
+		Roles = "";
+		Response += "*" + Username + "* you are in the Echonia Castle already.";
+		DesText = "";
+	}
+}
+var ct = 0;
+for (var i = 0; i < UserRoles.length; i++) {
+	if (UserRoles[i] === "290980610355232768" && Destination !== "Sanctuary Halls") {
+		Roles += "{role:" + Destination + "}\n{take:Sanctuary Halls}";
+	} else if (UserRoles[i] === "290980610355232768" && Destination === "Sanctuary Halls") {
+		Roles = "";
+		Response += "*" + Username + "* you are in Sanctuary Halls already.";
+		DesText = "";
+		ct++;
+	} else if (UserRoles[i] === "290980510455562240" && Destination !== "Orion City") {
+		Roles += "{role:" + Destination + "}\n{take:Orion City}";
+		ct++;
+	} else if (UserRoles[i] === "290980510455562240" && Destination === "Orion City") {
+		Roles = "";
+		Response += "*" + Username + "* you are in Orion City already.";
+		DesText = "";
+		ct++;
+		} else if (UserRoles[i] === "290980339126501377" && Destination !== "Bastian Castle") {
+		Roles += "{role:" + Destination + "}\n{take:Bastian Castle}";
+		ct++;
+	} else if (UserRoles[i] === "290980339126501377" && Destination === "Bastian Castle") {
+		Roles = "";
+		Response += "*" + Username + "* you are in the Bastian Castle already.";
+		DesText = "";
+		ct++;
+	} else if (((UserRoles[i] === "290980339126501377") || (UserRoles[i] === "290980510455562240") || (UserRoles[i] === "290980610355232768")) && Destination === "Echonia") {
+		Roles += "{take:" + GetRoleName(UserRoles[i]) + "}";
+		ct++;
+	}
+}
+if (ct === 0) {
+	Roles += "{role:" + Destination + "}";
+}
+resp = Response + DesText + Roles;
+>>
