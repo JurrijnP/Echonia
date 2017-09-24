@@ -28,11 +28,11 @@ function UpdateEmbed(Game) {
 		{color:" + GameEmbeds[Game]["Color"] + "}\
 		{title:" + Game + "}\
 		{desc:\
-Game made: " + prs(MainData[Game])["Game"] + "\n\
-Started: " + prs(MainData[Game])["Started"] + "\n\
+Game made: " + word(prs(MainData[Game])["Game"]) + "\n\
+Started: " + word(prs(MainData[Game])["Started"]) + "\n\
 Players: " + prs(MainData[Game])["Players"] + "\n\
 Max Players: " + prs(MainData[Game])["Max"] + "\n\
-Under Development: " + prs(MainData[Game])["DevMode"] + "\
+Under Development: " + word(prs(MainData[Game])["DevMode"]) + "\
 		}\
 		{image|url:https://raw.githubusercontent.com/JurrijnP/Echonia/master/Game%20Banners/" + GameEmbeds[Game]["Banner"] + "}\
 	}";
