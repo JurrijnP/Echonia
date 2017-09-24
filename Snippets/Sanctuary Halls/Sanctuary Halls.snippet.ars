@@ -11,6 +11,39 @@ e?games={init}
 //resp = Games().replace(/\n/g, "\n");
 >>
 [#CONTINUE#]
+&gm?setvar {params}={init}
+{req:Game Master}
+#js >>
+use MainData;
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+var VarName = Params.replace(/\s(.+)$/g, "");
+var Value = Params.replace(/((^\s(.+))|(\s(.+)$))/g, "");
+var DataType = Params.replace(/^(.+)\s(.+)\s/g, "");
+var ut = "created";
+if (MainData[VarName]) {
+	ut = "updated";
+}
+var ct = 0;
+if (DataType === "String") {
+	MainData[VarName] = Value;
+	ct++;
+} else if (DataType === "Object") {
+	MainData[VarName] = str(Value);
+	ct++;
+} else if (DataType === "Array") {
+	MainData[VarName] = str(Value);
+	ct++;
+} else if (DataType === "Int") {
+	MainData[VarName] = prs(Value);
+	ct++;
+} else {
+	resp = "Please enter a valid data type";
+}
+
+if (ct > 0) {
+	resp = "The variable **" + VarName + "** with a value of *" + Value + "* as type of `" + DataType + "` has succesfully been " + ut; ".";
+}
+[#CONTINUE#]
 &gm?setdata {params}={init}
 {req:Game Master}
 #js >>
