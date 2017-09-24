@@ -9,10 +9,11 @@ function prs(Input) {
 function word(Input) {
 	var newword = ""
 	if (typeof Input === "boolean") {
-		var firstletter = Input.substr(0, 1);
-		var left = Input.substr(0, (Input.length));
-		firstletter = firstletter.toUpperCase();
-		newword = firstletter + left;
+		if (Input === false) {
+			newword = "False";
+		} else if (Input === true) {
+			newword = "True";
+		} 
 	}
 	return newword;
 }
