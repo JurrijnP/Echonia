@@ -21,18 +21,20 @@ function UpdateEmbed(Game) {
 			"Banner": "Poker.jpg"
 		}
 	};
-	var Message = "{edit:361228194331754507}\n{embed:\
-{type:rich}\
-{color:" + GameEmbeds[Game]["Color"] + "}\
-{title:" + Game + "}\
-{desc:\
+	var Message = "{redirect:360433513625026562}\
+	{edit:" + GameEmbeds[Game]["Message"] + "}\
+	{embed:\
+		{type:rich}\
+		{color:" + GameEmbeds[Game]["Color"] + "}\
+		{title:" + Game + "}\
+		{desc:\
 Game made: " + prs(MainData[Game])["Game"] + "\n\
 Started: " + prs(MainData[Game])["Started"] + "\n\
 Players: " + prs(MainData[Game])["Players"] + "\n\
 Max Players: " + prs(MainData[Game])["Max"] + "\n\
 Under Development: " + prs(MainData[Game])["DevMode"] + "\
-}\
-{image|url:https://raw.githubusercontent.com/JurrijnP/Echonia/master/Game%20Banners/" + GameEmbeds[Game]["Banner"] + "}\
-}";
+		}\
+		{image|url:https://raw.githubusercontent.com/JurrijnP/Echonia/master/Game%20Banners/" + GameEmbeds[Game]["Banner"] + "}\
+	}";
 return Message;
 }
