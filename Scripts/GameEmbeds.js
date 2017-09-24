@@ -21,7 +21,7 @@ function UpdateEmbed(Game) {
 			"Banner": "Poker.jpg"
 		}
 	};
-	var Message = "{edit:" + GameEmbeds[Game]["Message"] + "}\n{embed:\
+	var Message = "{edit:361228194331754507}\n{embed:\
 {type:rich}\
 {color:" + GameEmbeds[Game]["Color"] + "}\
 {title:" + Game + "}\
