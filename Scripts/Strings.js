@@ -10,7 +10,7 @@ function estr(Input) {
 	special = special.replace(/(\.)/g, "\.");
 	special = JSON.stringify(special);
 	special = special.replace(/(\\\\)/g, "\\");
-	return JSON.stringify(special);
+	return special;
 };
 
 function prs(Input) {
