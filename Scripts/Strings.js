@@ -3,7 +3,7 @@ function str(Input) {
 };
 
 function estr(Input) {
-	var special = Input.replace(/(\W)/g, "\\" + `\$1`);
+	var special = Input.replace(/(\W)/g, "\\" + `$1`);
 	return JSON.stringify(special);
 };
 
