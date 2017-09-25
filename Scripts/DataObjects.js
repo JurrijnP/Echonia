@@ -62,7 +62,7 @@ function DataObjects(Game, Variable, Value) {
 		"Jackpot": {
 			"Lucky Number": 5157,
 			"Amount": 10000,
-			"Enabled": []
+			"Enabled": false
 		}
 	};
 	var obj = Objects[Game];
