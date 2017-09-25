@@ -8,17 +8,17 @@ function DataObjects(Game, Variable, Value) {
 		"5": "Max"
 	};
 	// Check if the correct variable type gets entered.
-	if ((Variable === "0") || (Variable === "2") || (Variable === "3")) {
+	if ((Variable == "0") || (Variable == "2") || (Variable == "3")) {
 		if ((typeof prs(Value)) !== "boolean") {
 			return resp = "{redirect:296318607112142848}`" + Value + "` is type of *" + (typeof prs(Value)) + "*, Expected type of *Boolean*.";
 		}
 	}
-	if ((Variable === "4") || (Variable === "5")) {
+	if ((Variable == "4") || (Variable == "5")) {
 		if ((typeof prs(Value)) !== "number") {
 			return resp = "{redirect:296318607112142848}`" + Value + "` is type of *" + (typeof prs(Value)) + "*, Expected type of *Number*.";
 		}
 	}
-	if (Variable === "1") {
+	if (Variable == "1") {
 		if ((typeof Value) !== "string") {
 			return resp = "{redirect:296318607112142848}`" + Value + "` is type of *" + (typeof Value) + "*, Expected type of *String*.";
 		}
@@ -66,11 +66,11 @@ function DataObjects(Game, Variable, Value) {
 		}
 	};
 	var obj = Objects[Game];
-	if (Variable !== 6 && Value !== "Reset") {
+	if (Variable !== "6" && Value !== "Reset") {
 		for (var i = 0; i < 6 && i !== Variable; i++) {
 			obj[(Options[i])] = prs(MainData[Game])[(Options[i])];
 		};
-		if ((((typeof prs(Value)) === "number") || ((typeof prs(Value)) === "boolean")) && Variable !== "1") {
+		if (Variable !== "1") {
 			obj[(Options[Variable])] = prs(Value);
 		} else {
 			obj[(Options[Variable])] = Value;
