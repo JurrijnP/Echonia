@@ -113,8 +113,10 @@ import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/String
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 var Confirmation = "";
 var Game = "";
+var log = "";
 for (var i = 0; i < MainData.length; i++) {
 	Game = Object.keys(MainData)[i];
+	var log += Game + ", ";
 	if (typeof prs(MainData[Game]) === "object") {
 		if (prs(MainData[Game])["Temp"] === UserID) {
 			Confirmation = Game;
@@ -127,6 +129,8 @@ if (Confirmation !== "") {
 	MainData[Confirmation] = DataObjects(Confirmation, "4", 1);
 	Games(Confirmation, 0, UserID);
 	resp = "*<@" + UserID + "> you have succesfully started a game of **" + Confirmation + "**.\nType `hm?help` in <#296315288671223808> for more info.\n{role:" + Confirmation + "}\n{ars:gameEmbeds}";
+} else {
+	resp = log;
 }
 >>
 [#CONTINUE#]
