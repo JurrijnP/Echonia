@@ -72,11 +72,15 @@ function DataObjects(Game, Variable, Value) {
 			if (i !== prs(Variable)) {
 				obj[(Options[i])] = prs(MainData[Game])[(Options[i])];
 			} else {
-				resp = "```i: " + i + "\nVariable: " + prs(Variable) + "```\n";
+				if (MainData["Debug"] === true) {
+					resp = "```i: " + i + "\nVariable: " + prs(Variable) + "```\n";
+				}
 			}
 		};
 		if (Value === "Reset") {
-			resp += "```Game: " + Game + "\nVariable: " + Variable + "\nValue: " + Value + "\nobj:" + str(obj) + "```\n";
+			if (MainData["Debug"] === true) {
+				resp += "```Game: " + Game + "\nVariable: " + Variable + "\nValue: " + Value + "\nobj:" + str(obj) + "```\n";
+			}
 			obj = str(obj);
 			return obj;
 		} else {
