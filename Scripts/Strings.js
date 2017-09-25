@@ -3,11 +3,11 @@ function str(Input) {
 };
 
 function estr(Input) {
-	var special = Input.replace(/(\[)/g, "\[");
-	special = special.replace(/(\])/g, "\]");
-	special = special.replace(/(\{)/g, "\{");
-	special = special.replace(/(\})/g, "\}");
-	special = special.replace(/(\.)/g, "\.");
+	var special = Input.replace(/(\[)/g, "\\\[");
+	special = special.replace(/(\])/g, "\\\]");
+	special = special.replace(/(\{)/g, "\\\{");
+	special = special.replace(/(\})/g, "\\\}");
+	special = special.replace(/(\.)/g, "\\\.");
 	special = JSON.stringify(special);
 	special = special.replace(/(\\\\)/g, "\\");
 	return special;
