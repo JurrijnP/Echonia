@@ -66,7 +66,7 @@ function DataObjects(Game, Variable, Value) {
 		}
 	};
 	var obj = Objects[Game];
-	if (((typeof prs(Value)) === "number") || ((typeof prs(Value)) === "boolean")) {
+	if ((((typeof prs(Value)) === "number") || ((typeof prs(Value)) === "boolean")) && Variable !== "1") {
 		obj[(Options[Variable])] = prs(Value);
 	} else {
 		obj[(Options[Variable])] = Value;
