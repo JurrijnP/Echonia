@@ -16,10 +16,13 @@ e?games={init}
 #js >>
 use MainData;
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+var Par = str(Params);
 var VarName = Params.replace(/\s(.+)$/g, "");
-var Value = Params.replace(/((^\s(.+))|(\s(.+)$))/g, "");
-var DataType = Params.replace(/^(.+)\s(.+)\s/g, "");
+var Value = Params.replace(/((^([^\s]+)\s)|(\s(Array|String|Int|Object)$))/g, "");
+var Re = new RegExp(VarName + "\\s" + estr(Value) + "\\s", "g");
+var DataType = Params.replace(Re, "");
 var ut = "created";
+var resp2 = "```Par: " + Par + "\nVarName: " + VarName + "\nValue: " + Value + "\nestr Value: " + estr(Value) + "\nDataType: " + DataType + "```";
 if (MainData[VarName]) {
 	ut = "updated";
 }
@@ -28,21 +31,22 @@ if (DataType === "String") {
 	MainData[VarName] = Value;
 	ct++;
 } else if (DataType === "Object") {
-	MainData[VarName] = str(Value);
+	MainData[VarName] = Value;
 	ct++;
 } else if (DataType === "Array") {
-	MainData[VarName] = str(Value);
+	MainData[VarName] = Value;
 	ct++;
 } else if (DataType === "Int") {
 	MainData[VarName] = prs(Value);
 	ct++;
-} else {
-	resp = "Please enter a valid data type";
 }
 
 if (ct > 0) {
-	resp = "The variable **" + VarName + "** with a value of *" + Value + "* as type of `" + DataType + "` has succesfully been " + ut; ".";
+	resp = "The variable **" + VarName + "** with a value of *" + Value + "* as type of `" + DataType + "` has succesfully been " + ut + ".";
+} else {
+	resp = "**Error:** \n" + resp2;
 }
+>>
 [#CONTINUE#]
 &gm?setdata {params}={init}
 {req:Game Master}
@@ -51,13 +55,17 @@ use MainData;
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 var Games = ["Hangman", "Yahtzee", "Battleships", "Slotmachine", "Horse Race", "Poker"];
-var Game = Params.replace(/\s([0-5])\s(.+)$/g, "");
-var Variable = Params.replace(/(^([^0-5]+)\s)|(\s([^0-5]+)$)/g, "");
-var Value = Params.replace(/(.+?)\s([0-5])\s/g, "");
+var Game = Params.replace(/\s([0-6])\s(.+)$/g, "");
+var Variable = Params.replace(/(^([^0-6]+)\s)|(\s([^0-6]+)$)/g, "");
+var Value = Params.replace(/(.+?)\s([0-6])\s/g, "");
 if (Games.indexOf(Game) > -1) {
 	MainData[Game] = DataObjects(Game, Variable, Value);
 	MainData["EmbedUpdate"] = Game;
-	resp = "*" + Variable + "* has succesfully updated for *" + Game + "*.\n{ars:gameEmbeds}";
+	if (Variable !== "6") {
+		resp = "*" + Variable + "* has succesfully updated for *" + Game + "*.\n{ars:gameEmbeds}";
+	} else {
+		resp = "Game data has succesfully been reset for *" + Game + "*.\n{ars:gameEmbeds}";
+	}
 } else {
 	resp = "*" + Game + "* is not a Game.\nType `gm?data` to view options.";
 }
@@ -84,11 +92,41 @@ if (prs(MainData["Hangman"])["DevMode"] === false) {
 		resp = "*<@" + UserID + ">* do you want to start a game of hangman?\n{ars:HSniffer}";
 		MainData["Hangman"] = DataObjects("Hangman", 1, UserID);
 	}
-} else if (MainData["DevIds"].indexOf(UserID) > -1) {
+} else if (prs(MainData["DevIds"]).indexOf(UserID) > -1) {
 	resp = "*<@" + UserID + ">* do you want to start a game of hangman?\n{ars:HSniffer}";
 	MainData["Hangman"] = DataObjects("Hangman", 1, UserID);
 } else {
 	resp = "*<@" + UserID + ">* sorry but hangman is currently under construction. Try again later!";
+}
+>>
+[#CONTINUE#]
+{:}(?i)(Yes)={init}
+{req:Sanctuary Halls}
+#js >>
+use MainData;
+use Battleships;
+use Hangman;
+use Poker;
+use Yahtzee;
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
+var Confirmation = "";
+var Game = "";
+for (var i = 0; i < MainData.length; i++) {
+	Game = Object.keys(MainData)[i];
+	if (typeof prs(MainData[Game]) === "object") {
+		if (prs(MainData[Game])["Temp"] === UserID) {
+			Confirmation = Game;
+		}
+	}
+}
+if (Confirmation !== "") {
+	MainData[Confirmation] = DataObjects(Confirmation, "1", "Reset");
+	MainData[Confirmation] = DataObjects(Confirmation, "2", true);
+	MainData[Confirmation] = DataObjects(Confirmation, "4", 1);
+	Games(Confirmation, 0, UserID);
+	resp = "*<@" + UserID + "> you have succesfully started a game of **" + Confirmation + "**.\nType `hm?help` in <#296315288671223808> for more info.\n{role:" + Confirmation + "}\n{ars:gameEmbeds}";
 }
 >>
 [#CONTINUE#]
@@ -100,6 +138,6 @@ import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/String
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 use MainData;
 if (prs(MainData["Hangman"])["Temp"] !== "") {
-	MainData["Hangman"] = DataObjects("Hangman", 1, "");
+	MainData["Hangman"] = DataObjects("Hangman", "1", "Reset");
 }
 >>
