@@ -8,8 +8,6 @@ function estr(Input) {
 	special = special.replace(/(\{)/g, "\\\{");
 	special = special.replace(/(\})/g, "\\\}");
 	special = special.replace(/(\.)/g, "\\\.");
-	special = JSON.stringify(special);
-	special = special.replace(/(\\\\)/g, "\\");
 	return special;
 };
 
