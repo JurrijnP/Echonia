@@ -7,6 +7,7 @@ function DataObjects(Game, Variable, Value) {
 		"4": "Players",
 		"5": "Max"
 	};
+	// Variable 6 Means full reset of object
 	// Check if the correct variable type gets entered.
 	if ((Variable == "0") || (Variable == "2") || (Variable == "3")) {
 		if ((typeof prs(Value)) !== "boolean") {
@@ -66,7 +67,10 @@ function DataObjects(Game, Variable, Value) {
 		}
 	};
 	var obj = Objects[Game];
-	if (Variable !== "6" && Value !== "Reset") {
+	if (Variable !== "6") {
+		if (Value === "Reset") {
+			Value = Objects[Game][(Options[Variable])];
+		}
 		for (var i = 0; i < 6 && i !== Variable; i++) {
 			obj[(Options[i])] = prs(MainData[Game])[(Options[i])];
 		};
