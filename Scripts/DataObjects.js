@@ -83,5 +83,8 @@ function DataObjects(Game, Variable, Value) {
 			obj = str(obj);
 			return obj;
 		}
+	} else {
+		obj = str(obj);
+		return obj;
 	}
 }
