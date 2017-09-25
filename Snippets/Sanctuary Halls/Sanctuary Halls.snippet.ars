@@ -18,7 +18,7 @@ use MainData;
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
 var Par = str(Params);
 var VarName = Params.replace(/\s(.+)$/g, "");
-var Value = Params.replace(/((^([^\s]+)\s)|(\s(Array|String|Int|Object)$))/g, "");
+var Value = Params.replace(/((^([^\s]+)\s)|(\s(Array|String|Int|Object|Bool)$))/g, "");
 var Re = new RegExp(VarName + "\\s" + estr(Value) + "\\s", "g");
 var DataType = Params.replace(Re, "");
 var ut = "created";
@@ -39,10 +39,18 @@ if (DataType === "String") {
 } else if (DataType === "Int") {
 	MainData[VarName] = prs(Value);
 	ct++;
+} else if (DataType === "Bool") {
+	MainData[VarName] = prs(Value);
+	ct++;
 }
 
 if (ct > 0) {
-	resp = "The variable **" + VarName + "** with a value of *" + Value + "* as type of `" + DataType + "` has succesfully been " + ut + ".";
+	if (MainData["Debug"] === "true") {
+		resp = "**Debug:**\n" + resp2 + "\n";
+		resp += "The variable **" + VarName + "** with a value of *" + Value + "* as type of `" + DataType + "` has succesfully been " + ut + ".";
+	} else {
+		resp = "The variable **" + VarName + "** with a value of *" + Value + "* as type of `" + DataType + "` has succesfully been " + ut + ".";
+	};
 } else {
 	resp = "**Error:** \n" + resp2;
 }
@@ -62,7 +70,11 @@ if (Games.indexOf(Game) > -1) {
 	MainData[Game] = DataObjects(Game, Variable, Value);
 	MainData["EmbedUpdate"] = Game;
 	if (Variable !== "6") {
-		resp = "*" + Variable + "* has succesfully updated for *" + Game + "*.\n{ars:gameEmbeds}";
+		if (MainData["Debug"] === "true") {
+			resp += "*" + Variable + "* has succesfully updated for *" + Game + "*.\n{ars:gameEmbeds}";
+		} else {
+			resp = "*" + Variable + "* has succesfully updated for *" + Game + "*.\n{ars:gameEmbeds}";
+		}
 	} else {
 		resp = "Game data has succesfully been reset for *" + Game + "*.\n{ars:gameEmbeds}";
 	}

@@ -72,13 +72,13 @@ function DataObjects(Game, Variable, Value) {
 			if (i !== prs(Variable)) {
 				obj[(Options[i])] = prs(MainData[Game])[(Options[i])];
 			} else {
-				if (MainData["Debug"] === true) {
+				if (MainData["Debug"] === "true") {
 					resp = "```i: " + i + "\nVariable: " + prs(Variable) + "```\n";
 				}
 			}
 		};
 		if (Value === "Reset") {
-			if (MainData["Debug"] === true) {
+			if (MainData["Debug"] === "true") {
 				resp += "```Game: " + Game + "\nVariable: " + Variable + "\nValue: " + Value + "\nobj:" + str(obj) + "```\n";
 			}
 			obj = str(obj);
