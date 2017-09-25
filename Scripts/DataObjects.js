@@ -68,11 +68,15 @@ function DataObjects(Game, Variable, Value) {
 	};
 	var obj = Objects[Game];
 	if (Variable !== "6") {
-		for (var i = 0; i < 6 && i !== prs(Variable); i++) {
-			obj[(Options[i])] = prs(MainData[Game])[(Options[i])];
+		for (var i = 0; i < 6; i++) {
+			if (i !== prs(Variable)) {
+				obj[(Options[i])] = prs(MainData[Game])[(Options[i])];
+			} else {
+				resp = "```i: " + i + "\nVariable: " prs(Variable) + "```\n";
+			}
 		};
 		if (Value === "Reset") {
-			resp = "```Game: " + Game + "\nVariable: " + Variable + "\nValue: " + Value + "\nobj:" + str(obj) + "```\n";
+			resp += "```Game: " + Game + "\nVariable: " + Variable + "\nValue: " + Value + "\nobj:" + str(obj) + "```\n";
 			obj = str(obj);
 			return obj;
 		} else {
