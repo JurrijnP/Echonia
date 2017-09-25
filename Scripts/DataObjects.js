@@ -68,7 +68,7 @@ function DataObjects(Game, Variable, Value) {
 	};
 	var obj = Objects[Game];
 	if (Variable !== "6") {
-		for (var i = 0; i < 6 && i !== Variable; i++) {
+		for (var i = 0; i < 6 && i !== prs(Variable); i++) {
 			obj[(Options[i])] = prs(MainData[Game])[(Options[i])];
 		};
 		if (Value === "Reset") {
