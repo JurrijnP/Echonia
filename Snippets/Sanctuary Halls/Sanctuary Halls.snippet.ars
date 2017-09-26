@@ -1,6 +1,6 @@
 e?info={init}
 #js >>
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Info.js";
 resp = Info().replace(/\n/g, "\n");
 >>
@@ -15,7 +15,7 @@ e?games={init}
 {req:Game Master}
 #js >>
 use MainData;
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 var Par = str(Params);
 var VarName = Params.replace(/\s(.+)$/g, "");
 var Value = Params.replace(/((^([^\s]+)\s)|(\s(Array|String|Int|Object|Bool)$))/g, "");
@@ -60,7 +60,7 @@ if (ct > 0) {
 {req:Game Master}
 #js >>
 use MainData;
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 var Games = ["Hangman", "Yahtzee", "Battleships", "Slotmachine", "Horse Race", "Poker"];
 var Game = Params.replace(/\s([0-6])\s(.+)$/g, "");
@@ -86,7 +86,7 @@ if (Games.indexOf(Game) > -1) {
 gameEmbeds={init}
 {arslock}
 #js >>
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/GameEmbeds.js";
 use MainData;
 var Edit = UpdateEmbed(MainData["EmbedUpdate"]);
@@ -97,7 +97,7 @@ e?hangman={init}
 {req:Sanctuary Halls}
 #js >>
 use MainData;
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 if (prs(MainData["Hangman"])["DevMode"] === false) {
 	if (prs(MainData["Hangman"])["Game"] === false && prs(MainData["Hangman"])["Temp"] === "") {
@@ -121,17 +121,18 @@ use Hangman;
 use Poker;
 use Yahtzee;
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 var Confirmation = "";
 var Game = "";
-var log = "";
-for (var i = 0; i < MainData.length; i++) {
-	Game = Object.keys(MainData)[i];
-	var log += Game + ", ";
-	if (typeof prs(MainData[Game]) === "object") {
-		if (prs(MainData[Game])["Temp"] === UserID) {
-			Confirmation = Game;
+var obj = sortObject(MainData);
+for (var i = 0; i < Object.keys(obj).length; i++) {
+	Game = Object.keys(obj)[i];
+	if (obj[Game].indexOf("{") > -1) {
+		if (typeof prs(obj[Game]) === "object") {
+			if (prs(MainData[Game])["Temp"] === UserID) {
+				Confirmation = Game;
+			}
 		}
 	}
 }
@@ -139,10 +140,8 @@ if (Confirmation !== "") {
 	MainData[Confirmation] = DataObjects(Confirmation, "1", "Reset");
 	MainData[Confirmation] = DataObjects(Confirmation, "2", true);
 	MainData[Confirmation] = DataObjects(Confirmation, "4", 1);
-	Games(Confirmation, 0, UserID);
+	// Games(Confirmation, 0, UserID);
 	resp = "*<@" + UserID + "> you have succesfully started a game of **" + Confirmation + "**.\nType `hm?help` in <#296315288671223808> for more info.\n{role:" + Confirmation + "}\n{ars:gameEmbeds}";
-} else {
-	resp = log;
 }
 >>
 [#CONTINUE#]
@@ -150,7 +149,7 @@ HSniffer={init}
 {arslock}
 {sleep:1m}
 #js >>
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 use MainData;
 if (prs(MainData["Hangman"])["Temp"] !== "") {

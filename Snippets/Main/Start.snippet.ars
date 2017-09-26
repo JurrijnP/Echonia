@@ -27,7 +27,7 @@ sendWelcomeBack={init}
 {arslock}
 #js >>
 use echonia;
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/UserObject.js";
 var txt = "{pm}Welcome back to Echonia *" + Username + "*.\nYou can continue straight away from where you left Echonia.";
 if (prs(echonia[UserID])["Game"] !== "") {
@@ -99,7 +99,7 @@ takeUR={init}
 [#CONTINUE#]
 e?info={init}
 #js >>
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Info.js";
 resp = Info().replace(/\n/g, "\n");
 >>
@@ -126,7 +126,7 @@ if ((UserID === "167717172343209984") || (UserID === "181536513631191050") || (U
 {del}
 #js >>
 use echonia;
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Strings.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/UserObject.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/GetRoleName.js";
 var Response = "{delme:10s}\n";
