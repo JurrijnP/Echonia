@@ -8,6 +8,9 @@ function DataObjects(Game, Variable, Value) {
 		"4": "Players",
 		"5": "Max"
 	};
+	if (MainData["Debug"] === "true") {
+		resp += "Arguments: " + arguments.length + "\n\t0: " + arguments[0] + "\n\t1: " + arguments[1] + "\n\t2: " + arguments[2];
+	}
 	if (arguments.length === 2) {
 		if (arguments[1] === "Reset") {
 			Reset = true;
@@ -73,7 +76,7 @@ function DataObjects(Game, Variable, Value) {
 	};
 	var obj = Objects[Game];
 	if (Reset === false) {
-		for (var i = 0; i < 6; i++) {
+		for (var i = 0; i < 5; i++) {
 			if (i !== prs(Variable)) {
 				obj[(Options[i])] = prs(MainData[Game])[(Options[i])];
 			}
