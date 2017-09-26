@@ -76,25 +76,29 @@ function DataObjects(Game, Variable, Value) {
 	};
 	var obj = Objects[Game];
 	if (Reset === false) {
-		for (var i = 0; i < 5; i++) {
-			if (i !== prs(Variable)) {
-				obj[(Options[i])] = prs(MainData[Game])[(Options[i])];
-			}
-		};
-		if (Value === "Reset") {
-			if (MainData["Debug"] === "true") {
-				resp += "```Game: " + Game + "\nVariable: " + Variable + "\nValue: " + Value + "\nobj:" + str(obj) + "```\n";
-			}
-			obj = str(obj);
-			return obj;
-		} else {
-			if (Variable !== 1) {
-				obj[(Options[Variable])] = prs(Value);
+		if (typeof prs(Variable) === "number") {
+			for (var i = 0; i < 5; i++) {
+				if (i !== prs(Variable)) {
+					obj[(Options[i])] = prs(MainData[Game])[(Options[i])];
+				}
+			};
+			if (Value === "Reset") {
+				if (MainData["Debug"] === "true") {
+					resp += "```Game: " + Game + "\nVariable: " + Variable + "\nValue: " + Value + "\nobj:" + str(obj) + "```\n";
+				}
+				obj = str(obj);
+				return obj;
 			} else {
-				obj[(Options[Variable])] = Value;
+				if (Variable !== 1) {
+					obj[(Options[Variable])] = prs(Value);
+				} else {
+					obj[(Options[Variable])] = Value;
+				}
+				obj = str(obj);
+				return obj;
 			}
-			obj = str(obj);
-			return obj;
+		} else {
+			resp += "\nError: " + Variable;
 		}
 	} else {
 		obj = str(obj);
