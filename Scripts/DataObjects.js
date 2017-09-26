@@ -1,4 +1,5 @@
 function DataObjects(Game, Variable, Value) {
+	var Reset = false;
 	var Options = {
 		"0": "DevMode",
 		"1": "Temp",
@@ -7,21 +8,25 @@ function DataObjects(Game, Variable, Value) {
 		"4": "Players",
 		"5": "Max"
 	};
-	// Variable 6 Means full reset of object
-	// Check if the correct variable type gets entered.
-	if ((Variable == "0") || (Variable == "2") || (Variable == "3")) {
-		if ((typeof prs(Value)) !== "boolean") {
-			return resp = "{redirect:296318607112142848}`" + Value + "` is type of *" + (typeof prs(Value)) + "*, Expected type of *Boolean*.";
+	if (arguments.length === 2) {
+		if (arguments[1] === "Reset") {
+			Reset = true;
 		}
-	}
-	if ((Variable == "4") || (Variable == "5")) {
-		if ((typeof prs(Value)) !== "number") {
-			return resp = "{redirect:296318607112142848}`" + Value + "` is type of *" + (typeof prs(Value)) + "*, Expected type of *Number*.";
+	} else {
+		if ((Variable === 0) || (Variable === 2) || (Variable === 3)) {
+			if ((typeof prs(Value)) !== "boolean") {
+				return resp = "{redirect:296318607112142848}`" + Value + "` is type of *" + (typeof prs(Value)) + "*, Expected type of *Boolean*.";
+			}
 		}
-	}
-	if (Variable == "1") {
-		if ((typeof Value) !== "string") {
-			return resp = "{redirect:296318607112142848}`" + Value + "` is type of *" + (typeof Value) + "*, Expected type of *String*.";
+		if ((Variable === 4) || (Variable === 5)) {
+			if ((typeof prs(Value)) !== "number") {
+				return resp = "{redirect:296318607112142848}`" + Value + "` is type of *" + (typeof prs(Value)) + "*, Expected type of *Number*.";
+			}
+		}
+		if (Variable === 1) {
+			if ((typeof Value) !== "string") {
+				return resp = "{redirect:296318607112142848}`" + Value + "` is type of *" + (typeof Value) + "*, Expected type of *String*.";
+			}
 		}
 	}
 	var Objects = {
@@ -67,14 +72,10 @@ function DataObjects(Game, Variable, Value) {
 		}
 	};
 	var obj = Objects[Game];
-	if (Variable !== "6") {
+	if (Reset === false) {
 		for (var i = 0; i < 6; i++) {
 			if (i !== prs(Variable)) {
 				obj[(Options[i])] = prs(MainData[Game])[(Options[i])];
-			} else {
-				if (MainData["Debug"] === "true") {
-					resp += "```i: " + i + "\nVariable: " + prs(Variable) + "```\n";
-				}
 			}
 		};
 		if (Value === "Reset") {
@@ -84,7 +85,7 @@ function DataObjects(Game, Variable, Value) {
 			obj = str(obj);
 			return obj;
 		} else {
-			if (Variable !== "1") {
+			if (Variable !== 1) {
 				obj[(Options[Variable])] = prs(Value);
 			} else {
 				obj[(Options[Variable])] = Value;
