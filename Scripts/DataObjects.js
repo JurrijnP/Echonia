@@ -73,7 +73,7 @@ function DataObjects(Game, Variable, Value) {
 				obj[(Options[i])] = prs(MainData[Game])[(Options[i])];
 			} else {
 				if (MainData["Debug"] === "true") {
-					resp = "```i: " + i + "\nVariable: " + prs(Variable) + "```\n";
+					resp += "```i: " + i + "\nVariable: " + prs(Variable) + "```\n";
 				}
 			}
 		};
