@@ -1,3 +1,21 @@
+function sortObject(o) {
+    var sorted = {},
+    key, a = [];
+
+    for (key in o) {
+        if (o.hasOwnProperty(key)) {
+            a.push(key);
+        }
+    }
+
+    a.sort();
+
+    for (key = 0; key < a.length; key++) {
+        sorted[a[key]] = o[a[key]];
+    }
+    return sorted;
+}
+
 function str(Input) {
 	return JSON.stringify(Input);
 };
@@ -25,4 +43,4 @@ function word(Input) {
 		} 
 	}
 	return newword;
-}
+};
