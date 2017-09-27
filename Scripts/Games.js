@@ -31,6 +31,9 @@ function Games(Game, Variable, Value) {
 				Hangman["Guessers"] = str(arr);
 			default:
 				resp += "ProcessError: Case was not selected.";
+				if (MainData["Debug"] === "true") {
+					resp += "\n**Games Function argument values**\nGame: " + Game + "\nVariable: " + Variable + "\nValue: " + Value;
+				}
 		}
 	}
 };

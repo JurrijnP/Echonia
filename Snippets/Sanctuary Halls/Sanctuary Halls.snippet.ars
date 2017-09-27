@@ -123,7 +123,7 @@ if (prs(MainData["Hangman"])["DevMode"] === false) {
 &{:}(?i)(^Yes)={init}
 #js >>
 use MainData;
-// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 var Confirmation = "";
