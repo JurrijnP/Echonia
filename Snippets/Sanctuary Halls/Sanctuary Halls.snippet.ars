@@ -63,21 +63,25 @@ use MainData;
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 var Games = ["Hangman", "Yahtzee", "Battleships", "Slotmachine", "Horse Race", "Poker"];
-var Game = Params.replace(/\s([0-6])\s(.+)$/g, "");
-var Variable = Params.replace(/(^([^0-6]+)\s)|(\s([^0-6]+)$)/g, "");
-var Value = Params.replace(/(.+?)\s([0-6])\s/g, "");
+var arr = Params.split(" ");
+var Game = arr[0];
+var Variable = arr[1];
+var Value = "";
+if (arr.length > 2) {
+	Value = arr[2];
+}
 if (Games.indexOf(Game) > -1) {
-	MainData[Game] = DataObjects(Game, Variable, Value);
-	MainData["EmbedUpdate"] = Game;
-	if (Variable !== "6") {
+	if (Variable !== "Reset") {
 		if (MainData["Debug"] === "true") {
-			resp += "*" + Variable + "* has succesfully updated for *" + Game + "*.\n{ars:gameEmbeds}";
+			resp = "*" + Variable + "* has succesfully updated for *" + Game + "*.\n{ars:gameEmbeds}";
+			MainData[Game] = DataObjects(Game, Variable, Value);
 		} else {
 			resp = "*" + Variable + "* has succesfully updated for *" + Game + "*.\n{ars:gameEmbeds}";
 		}
 	} else {
 		resp = "Game data has succesfully been reset for *" + Game + "*.\n{ars:gameEmbeds}";
 	}
+	MainData[Game] = DataObjects(Game, Variable, Value);
 } else {
 	resp = "*" + Game + "* is not a Game.\nType `gm?data` to view options.";
 }
@@ -105,44 +109,60 @@ if (prs(MainData["Hangman"])["DevMode"] === false) {
 		MainData["Hangman"] = DataObjects("Hangman", 1, UserID);
 	}
 } else if (prs(MainData["DevIds"]).indexOf(UserID) > -1) {
-	resp = "*<@" + UserID + ">* do you want to start a game of hangman?\n{ars:HSniffer}";
-	MainData["Hangman"] = DataObjects("Hangman", 1, UserID);
+	if (prs(MainData["Hangman"])["Game"] === false && prs(MainData["Hangman"])["Temp"] === "") {
+		resp = "*<@" + UserID + ">* do you want to start a game of hangman?\n{ars:HSniffer}";
+		MainData["Hangman"] = DataObjects("Hangman", 1, UserID);
+	} else {
+		resp = "*<@" + UserID + ">* another Developer already typed `e?hangman`.";
+	}
 } else {
 	resp = "*<@" + UserID + ">* sorry but hangman is currently under construction. Try again later!";
 }
 >>
 [#CONTINUE#]
-{:}(?i)(Yes)={init}
+&{:}(?i)(^Yes)={init}
 #js >>
 use MainData;
 use Battleships;
 use Hangman;
 use Poker;
 use Yahtzee;
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 var Confirmation = "";
 var Game = "";
 var obj = sortObject(MainData);
+var log = "";
+var ct = 0;
 for (var i = 0; i < Object.keys(obj).length; i++) {
 	Game = Object.keys(obj)[i];
 	if (obj[Game].indexOf("{") > -1) {
+		ct++;
 		if (typeof prs(obj[Game]) === "object") {
+			ct++;
 			if (prs(MainData[Game])["Temp"] === UserID) {
+				ct++;
+				ct2++;
 				Confirmation = Game;
 			}
 		}
 	}
+	log += "i(" + i + "), ct = " + ct + "\n";
+	ct = 0;
 }
 if (Confirmation !== "") {
-	resp = "*<@" + UserID + "> you have succesfully started a game of **" + Confirmation + "**.\nType `hm?help` in <#296315288671223808> for more info.\n{role:" + Confirmation + "}\n{ars:gameEmbeds}";
+	resp = "*<@" + UserID + ">* you have succesfully started a game of **" + Confirmation + "**.\nType `hm?help` in <#296315288671223808> for more info.\n{role:" + Confirmation + "}\n{ars:gameEmbeds}";
 	MainData[Confirmation] = DataObjects(Confirmation, 1, "Reset");
 	MainData[Confirmation] = DataObjects(Confirmation, 2, true);
 	MainData[Confirmation] = DataObjects(Confirmation, 4, 1);
 	// Games(Confirmation, 0, UserID);
 } else {
-	resp = "Failed";
+	if (ct2 > 0) {
+		if (MainData["Debug"] === "true") {
+			resp = "Failed\n" + log + "\n" + typeof UserID;
+		}
+	}
 }
 >>
 [#CONTINUE#]
@@ -154,6 +174,7 @@ import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Variab
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 use MainData;
 if (prs(MainData["Hangman"])["Temp"] !== "") {
+	resp = "";
 	MainData["Hangman"] = DataObjects("Hangman", 1, "Reset");
 }
 >>
