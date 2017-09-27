@@ -10,15 +10,13 @@ function DataObjects(Game, Variable, Value) {
 	};
 	var cta = 0;
 	if (MainData["Debug"] === "true") {
-		if (arguments.length === 3) {
+		if (arguments.length === 3 && arguments[2] !== "") {
 			resp += "Arguments: " + arguments.length + "\n\t0: " + arguments[0] + "\n\t1: " + arguments[1] + "\n\t2: " + arguments[2];
-			return;
-		} else if (arguments.length === 2) {
+		} else {
 			resp += "Arguments: " + arguments.length + "\n\t0: " + arguments[0] + "\n\t1: " + arguments[1];
-			return;
 		}
 	}
-	if (arguments.length === 2) {
+	if (arguments.length === 3 && arguments[2] === "") {
 		cta++;
 		if (arguments[1] === "Reset") {
 			Reset = true;
@@ -28,9 +26,6 @@ function DataObjects(Game, Variable, Value) {
 			resp += "\n\ncta: " + cta;
 		}
 	} else {
-		if (MainData["Debug"] === "true") {
-			resp += "\n\ncta: " + cta;
-		}
 		if ((Variable === 0) || (Variable === 2) || (Variable === 3)) {
 			if ((typeof prs(Value)) !== "boolean") {
 				return resp = "{redirect:296318607112142848}`" + Value + "` is type of *" + (typeof prs(Value)) + "*, Expected type of *Boolean*.";
