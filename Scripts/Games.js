@@ -24,16 +24,19 @@ function Games(Game, Variable, Value) {
 				Hangman["Letters"] = str([]);
 				Hangman["Guessers"] = str([]);
 				Hangman["Mistakes"] = 0;
+				break;
 			case 1:
 				DataObjects(Confirmation, 4, (prs(MainData["Hangman"])["Players"] + 1));
 				var arr = prs(Hangman["Guessers"]);
 				arr[(arr.length)] = Value;
 				Hangman["Guessers"] = str(arr);
+				break;
 			default:
 				resp += "ProcessError: Case was not selected.";
 				if (MainData["Debug"] === "true") {
 					resp += "\n**Games Function argument values**\nGame: " + Game + "(" + typeof Game + ")\nVariable: " + Variable + "(" + typeof Variable + ")\nValue: " + Value;
-				}
+				};
+				break;
 		}
 	}
 };
