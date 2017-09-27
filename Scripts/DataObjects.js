@@ -8,14 +8,23 @@ function DataObjects(Game, Variable, Value) {
 		"4": "Players",
 		"5": "Max"
 	};
+	var cta = 0;
 	if (MainData["Debug"] === "true") {
-		resp += "Arguments: " + arguments.length + "\n\t0: " + arguments[0] + "\n\t1: " + arguments[1] + "\n\t2: " + arguments[2];
+		//resp += "Arguments: " + arguments.length + "\n\t0: " + arguments[0] + "\n\t1: " + arguments[1] + "\n\t2: " + arguments[2];
 	}
 	if (arguments.length === 2) {
+		cta++;
 		if (arguments[1] === "Reset") {
 			Reset = true;
+			cta++;
+		}
+		if (MainData["Debug"] === "true") {
+			resp += "\n\ncta: " + cta;
 		}
 	} else {
+		if (MainData["Debug"] === "true") {
+			resp += "\n\ncta: " + cta;
+		}
 		if ((Variable === 0) || (Variable === 2) || (Variable === 3)) {
 			if ((typeof prs(Value)) !== "boolean") {
 				return resp = "{redirect:296318607112142848}`" + Value + "` is type of *" + (typeof prs(Value)) + "*, Expected type of *Boolean*.";
