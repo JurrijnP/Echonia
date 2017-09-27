@@ -6,7 +6,6 @@ use MainData;
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 
-
 function Games(Game, Variable, Value) {
 	/*
 		Variable meanings:
