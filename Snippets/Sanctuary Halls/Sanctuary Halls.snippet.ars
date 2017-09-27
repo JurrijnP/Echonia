@@ -123,10 +123,6 @@ if (prs(MainData["Hangman"])["DevMode"] === false) {
 &{:}(?i)(^Yes)={init}
 #js >>
 use MainData;
-use Battleships;
-use Hangman;
-use Poker;
-use Yahtzee;
 // "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
@@ -135,6 +131,7 @@ var Game = "";
 var obj = sortObject(MainData);
 var log = "";
 var ct = 0;
+var ct2 = 0;
 for (var i = 0; i < Object.keys(obj).length; i++) {
 	Game = Object.keys(obj)[i];
 	if (obj[Game].indexOf("{") > -1) {
@@ -156,7 +153,7 @@ if (Confirmation !== "") {
 	MainData[Confirmation] = DataObjects(Confirmation, 1, "Reset");
 	MainData[Confirmation] = DataObjects(Confirmation, 2, true);
 	MainData[Confirmation] = DataObjects(Confirmation, 4, 1);
-	// Games(Confirmation, 0, UserID);
+	Games(Confirmation, 0, UserID);
 } else {
 	if (ct2 > 0) {
 		if (MainData["Debug"] === "true") {

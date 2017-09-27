@@ -1,0 +1,11 @@
+hm?help={init}
+{req:Hangman}
+#js >>
+use Hangman;
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
+if (Hangman["Chooser"] === UserID) {
+	resp = GameHelp("Hangman", 0);
+} else if (Hangman["Guessers"].indexOf(UserID) > -1) {
+	resp = GameHelp("Hangman", 1);
+}
+>>
