@@ -2,6 +2,8 @@ hm?help={init}
 {req:Hangman}
 #js >>
 use Hangman;
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
 if (Hangman["Chooser"] === UserID) {
 	resp = GameHelp("Hangman", 0);

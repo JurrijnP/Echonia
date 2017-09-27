@@ -1,11 +1,3 @@
-use Battleships;
-use Hangman;
-use Poker;
-use Yahtzee;
-use MainData;
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
-
 function Games(Game, Variable, Value) {
 	/*
 		Variable meanings:
@@ -43,8 +35,7 @@ function Games(Game, Variable, Value) {
 function GameHelp(Game, PlayerType) {
 	if (Game === "Hangman") {
 		if (PlayerType === 0) {
-			resp = "\
-{pm}\
+			resp = "{pm}\n\
 Hey " + Username + " you are the person to choose the word!\n\
 To invite other people you must first do 2 other things:\n\
 **1.** You have to set a word by typing `hm?setword <Word>`\n\
