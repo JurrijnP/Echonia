@@ -10,7 +10,8 @@ function DataObjects(Game, Variable, Value) {
 	};
 	var cta = 0;
 	if (MainData["Debug"] === "true") {
-		//resp += "Arguments: " + arguments.length + "\n\t0: " + arguments[0] + "\n\t1: " + arguments[1] + "\n\t2: " + arguments[2];
+		resp += "Arguments: " + arguments.length + "\n\t0: " + arguments[0] + "\n\t1: " + arguments[1] + "\n\t2: " + arguments[2];
+		return;
 	}
 	if (arguments.length === 2) {
 		cta++;
