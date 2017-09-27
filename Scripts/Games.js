@@ -32,7 +32,7 @@ function Games(Game, Variable, Value) {
 			default:
 				resp += "ProcessError: Case was not selected.";
 				if (MainData["Debug"] === "true") {
-					resp += "\n**Games Function argument values**\nGame: " + Game + "\nVariable: " + Variable + "\nValue: " + Value;
+					resp += "\n**Games Function argument values**\nGame: " + Game + "(" + typeof Game + ")\nVariable: " + Variable + "(" + typeof Variable + ")\nValue: " + Value;
 				}
 		}
 	}
