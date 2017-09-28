@@ -10,8 +10,8 @@ function Help() {
 	} else if (arguments.length === 1 && arguments[0] === "Topics") {
 		msg = "{del}\n{pm}\n{embed:\n\
 	{type:rich}\n\
-	{Title:Help Topics}\n\
-	{field[0]|title:Betting}\n\
+	{title:Help Topics}\n\
+	{field[0]|name:Betting}\n\
 	{field[0]|value:Subtopics: Range}\n\
 	{field[0]|inline:false}\n\
 	{footer|icon:https://raw.githubusercontent.com/JurrijnP/Echonia/master/Images/Echonia.png}\n\
