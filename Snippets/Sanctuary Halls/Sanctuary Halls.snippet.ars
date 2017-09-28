@@ -24,10 +24,10 @@ if (arr[1] !== "") {
 if (Topic !== "" && Subtopic !== "") {
 	Help(Topic, Subtopic);
 } else if (Topic !== "" && Subtopic === "") {
-	Help(Topic);
+	resp = Help(Topic);
 }
 if (MainData["Debug"] === "true") {
-	resp = "```" + arr + "\n" + typeof arr + "\n" + arr.length + "\n" + str(arr);
+	resp += "```" + arr + "\n" + typeof arr + "\n" + arr.length + "\n" + str(arr);
 	for (var i = 0; i < arr.length; i++) {
 		resp += "\n" + i + ": " + arr[i];
 	}
