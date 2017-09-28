@@ -1,4 +1,9 @@
 function Help() {
+	if (MainData["Debug"] === "true") {
+		if (arguments.length > 0) {
+			resp += str(arguments);
+		}
+	}
 	if (arguments.length === 0) {
 		msg = "{del}\n*" + Username + "* haven't given me a topic and subtopic to give you more information about.\nType `e?help Topics` to get a list of all topics.";
 		return msg;

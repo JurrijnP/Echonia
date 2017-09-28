@@ -11,10 +11,11 @@ var arr = Params.split(" ");
 var Topic = "";
 var Subtopic = "";
 use MainData;
+resp = "";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Help.js";
 import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
 if (arr[0] === "") {
-	resp = Help();
+	resp += Help();
 } else if (arr[0] !== "") {
 	Topic = arr[0];
 }
@@ -22,9 +23,9 @@ if (arr[1] !== "") {
 	Subtopic = arr[1];
 }
 if (Topic !== "" && Subtopic !== "") {
-	Help(Topic, Subtopic);
+	resp += Help(Topic, Subtopic);
 } else if (Topic !== "" && Subtopic === "") {
-	resp = Help(Topic);
+	resp += Help(Topic);
 }
 if (MainData["Debug"] === "true") {
 	resp += "```" + arr + "\n" + typeof arr + "\n" + arr.length + "\n" + str(arr);
