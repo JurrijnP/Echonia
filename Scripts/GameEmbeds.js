@@ -34,7 +34,7 @@ Players: " + prs(MainData[Game])["Players"] + "\n\
 Max Players: " + prs(MainData[Game])["Max"] + "\n\
 Under Development: " + word(prs(MainData[Game])["DevMode"]) + "\
 		}\
-		{image|url:https://raw.githubusercontent.com/JurrijnP/Echonia/master/Game%20Banners/" + GameEmbeds[Game]["Banner"] + "}\
+		{image|url:https://raw.githubusercontent.com/JurrijnP/Echonia/master/Images/Game%20Banners/" + GameEmbeds[Game]["Banner"] + "}\
 	}";
 return Message;
 }

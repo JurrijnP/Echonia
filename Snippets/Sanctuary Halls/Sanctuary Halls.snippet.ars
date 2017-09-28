@@ -5,6 +5,25 @@ import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Info.j
 resp = Info().replace(/\n/g, "\n");
 >>
 [#CONTINUE#]
+&e?help {params}={init}
+#js >>
+var arr = Params.split(" ");
+var Topic = "";
+var Subtopic = "";
+if (arr[0] === "") {
+	Help();
+} else if (arr[0] !== "") {
+	Topic = arr[0];
+}
+if (arr[1] !== "") {
+	Subtopic = arr[1];
+}
+if (Topic !== "" && Subtopic !== "") {
+	Help(Topic, Subtopic);
+} else if (Topic !== "" && Subtopic === "") {
+	Help(Topic);
+}
+[#CONTINUE#]
 e?games={init}
 #js >>
 //import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";

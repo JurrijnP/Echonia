@@ -40,8 +40,8 @@ Hey " + Username + " you are the person to choose the word!\n\
 To invite other people you must first do 2 other things:\n\
 **1.** You have to set a word by typing `hm?setword <Word>`\n\
 For the worldrules type `hm?wordrules`\n\
-**2.** You have to set a range of the minimum & maximum amount of gold that can be used to bet.\n\n\
-For more help bet ranging type `e?help Betting Range` in <#290983769840680961>\n\
+**2.** You have to set a range of the minimum & maximum amount of gold that can be used to bet.\n\
+For more help bet ranging type `e?help Betting Range` in <#290983769840680961>\n\n\
 Once you have done the above 2 things you can start inviting people by typing `e?invite Hangman <Mention user here>` in <#290983769840680961>\n\
 The user you invited will get a PM with a special code to accept or cancel your invite.\n\
 You can invite up to 7 players.\n\n\
