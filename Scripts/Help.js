@@ -1,6 +1,6 @@
 function Help() {
 	if (arguments.length === 0) {
-		resp = "{del}\n*" + Username "* haven't given me a topic and subtopic to give you more information about.\nType `e?help Topics` to get a list of all topics.";
+		resp = "{del}\n*" + Username + "* haven't given me a topic and subtopic to give you more information about.\nType `e?help Topics` to get a list of all topics.";
 		return;
 	if (arguments.length === 1 && arguments[0] === "Topics") {
 		resp = "{del}\n{pm}\n\

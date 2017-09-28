@@ -10,6 +10,8 @@ resp = Info().replace(/\n/g, "\n");
 var arr = Params.split(" ");
 var Topic = "";
 var Subtopic = "";
+use MainData;
+import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Help.js";
 if (arr[0] === "") {
 	Help();
 } else if (arr[0] !== "") {
@@ -23,6 +25,10 @@ if (Topic !== "" && Subtopic !== "") {
 } else if (Topic !== "" && Subtopic === "") {
 	Help(Topic);
 }
+if (MainData["Debug"] === "true") {
+	resp = "```" + arr + "```";
+}
+>>
 [#CONTINUE#]
 e?games={init}
 #js >>
