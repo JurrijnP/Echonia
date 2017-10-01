@@ -27,8 +27,10 @@ sendWelcomeBack={init}
 {arslock}
 #js >>
 use echonia;
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/UserObject.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/UserObject.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
+import "http://77.174.95.206/Scripts/UserObject.js";
 var txt = "{pm}Welcome back to Echonia *" + Username + "*.\nYou can continue straight away from where you left Echonia.";
 if (prs(echonia[UserID])["Game"] !== "") {
 	txt += "\nYour data shows you were playing a game so that data has been reset for you.";
@@ -99,8 +101,10 @@ takeUR={init}
 [#CONTINUE#]
 e?info={init}
 #js >>
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Info.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Info.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
+import "http://77.174.95.206/Scripts/Info.js";
 resp = Info().replace(/\n/g, "\n");
 >>
 [#CONTINUE#]
@@ -126,9 +130,12 @@ if ((UserID === "167717172343209984") || (UserID === "181536513631191050") || (U
 {del}
 #js >>
 use echonia;
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/UserObject.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/GetRoleName.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/UserObject.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/GetRoleName.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
+import "http://77.174.95.206/Scripts/UserObject.js";
+import "http://77.174.95.206/Scripts/GetRoleName.js";
 var Response = "{delme:10s}\n";
 var DesText = "";
 var Destination = "";

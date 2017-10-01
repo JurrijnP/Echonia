@@ -2,12 +2,59 @@ hm?help={init}
 {req:Hangman}
 #js >>
 use Hangman;
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Help.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
+import "http://77.174.95.206/Scripts/DataObjects.js";
+import "http://77.174.95.206/Scripts/Games.js";
+import "http://77.174.95.206/Scripts/Help.js";
 if (Hangman["Chooser"] === UserID) {
 	GameHelp("Hangman", 0);
 } else if (Hangman["Guessers"].indexOf(UserID) > -1) {
 	resp = GameHelp("Hangman", 1);
 }
 >>
+[#CONTINUE#]
+&hm?setword {params}={init}
+#js >>
+import "http://77.174.95.206/Scripts/Games.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
+use Hangman;
+var Word = "";
+var ct = 0;
+if (Hangman["Chooser"] === UserID) {
+	if (RegExp("[^A-Z ]", "ig").test(Params)) {
+		resp = "Please only use letters";
+	} else if (Params.indexOf(" ") > -1) {
+		resp = "Please keep your submission to 1 word.";
+	} else {
+		Word = Params;
+		if (wordChecker(Word) === false) {
+			resp = "*" + Word + "* is not a real word.";
+		} else {
+			resp = "Your submission has succesfully been set to: *" + Params + "*";
+			Hangman["Word"] = Word;
+		}
+	}
+}
+>>
+[#CONTINUE#]
+&hm?setbet {params}={init}
+{req:Hangman}
+#js >>
+use Echonia;
+use Hangman;
+import "http://77.174.95.206/Scripts/Games.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
+resp = setBet("Hangman", UserID, Params);
+>>
+[#CONTINUE#]
+hm?start={init}
+#js >>
+use Hangman;
+import "http://77.174.95.206/Scripts/Games.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
+resp = "";
+startGame("Hangman");

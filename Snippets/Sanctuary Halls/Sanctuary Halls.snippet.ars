@@ -1,44 +1,73 @@
+Debug={init}
+{arslock}
+#js >>
+	resp = MainData["DebugText"]
+[#CONTINUE#]
 e?info={init}
 #js >>
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Info.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Info.js";
+import "http://77.174.95.206/Scripts/Info.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
 resp = Info().replace(/\n/g, "\n");
 >>
 [#CONTINUE#]
 &e?help {params}={init}
+{del}
 #js >>
+use MainData;
+resp = "";
 var arr = Params.split(" ");
 var Topic = "";
 var Subtopic = "";
-use MainData;
-resp = "";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Help.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+var ct = 0;
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Help.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+import "http://77.174.95.206/Scripts/Help.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
 if (arr[0] === "") {
 	resp += Help();
 } else if (arr[0] !== "") {
 	Topic = arr[0];
 }
-if (arr[1] !== "") {
+if ((arr[1]) && (arr[1] !== "")) {
 	Subtopic = arr[1];
 }
 if (Topic !== "" && Subtopic !== "") {
 	resp += Help(Topic, Subtopic);
 } else if (Topic !== "" && Subtopic === "") {
 	resp += Help(Topic);
+	ct++;
 }
 if (MainData["Debug"] === "true") {
-	resp += "```" + arr + "\n" + typeof arr + "\n" + arr.length + "\n" + str(arr);
+	MainData["DebugText"] += "**Trigger:** " + Trigger;
+	MainData["DebugText"] += "```" + arr + "\n" + typeof arr + "\n" + arr.length + "\n" + str(arr);
 	for (var i = 0; i < arr.length; i++) {
-		resp += "\n" + i + ": " + arr[i];
+		MainData["DebugText"] += "\n" + i + ": " + arr[i];
 	}
-	resp += "```";
+	MainData["DebugText"] += "\n\nTopic: " + str(Topic) + "\nSubtopic: " + str(Subtopic) + "\n\n";
+	MainData["DebugText"] += "\n" + ct + "```";
+	resp += "\n{ars:Debug}";
 }
+>>
+[#CONTINUE#]
+&e?invite {params}={init}
+#js >>
+use MainData;
+use Hangman;
+use Battleships;
+use Poker;
+use Yahtzee;
+use Echonia;
+import "http://77.174.95.206/Scripts/Games.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
+resp = invite("{/rawid}", UserID, Params);
 >>
 [#CONTINUE#]
 e?games={init}
 #js >>
-//import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
+import "http://77.174.95.206/Scripts/Games.js";
 //resp = Games().replace(/\n/g, "\n");
 >>
 [#CONTINUE#]
@@ -46,7 +75,8 @@ e?games={init}
 {req:Game Master}
 #js >>
 use MainData;
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
 var Par = str(Params);
 var VarName = Params.replace(/\s(.+)$/g, "");
 var Value = Params.replace(/((^([^\s]+)\s)|(\s(Array|String|Int|Object|Bool)$))/g, "");
@@ -91,8 +121,10 @@ if (ct > 0) {
 {req:Game Master}
 #js >>
 use MainData;
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
+import "http://77.174.95.206/Scripts/DataObjects.js";
 var Games = ["Hangman", "Yahtzee", "Battleships", "Slotmachine", "Horse Race", "Poker"];
 var arr = Params.split(" ");
 var Game = arr[0];
@@ -121,8 +153,10 @@ if (Games.indexOf(Game) > -1) {
 gameEmbeds={init}
 {arslock}
 #js >>
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/GameEmbeds.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/GameEmbeds.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
+import "http://77.174.95.206/Scripts/GameEmbeds.js";
 use MainData;
 var Edit = UpdateEmbed(MainData["EmbedUpdate"]);
 resp = Edit.replace(/\n/g, "\n");
@@ -132,8 +166,10 @@ e?hangman={init}
 {req:Sanctuary Halls}
 #js >>
 use MainData;
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
+import "http://77.174.95.206/Scripts/DataObjects.js";
 if (prs(MainData["Hangman"])["DevMode"] === false) {
 	if (prs(MainData["Hangman"])["Game"] === false && prs(MainData["Hangman"])["Temp"] === "") {
 		resp = "*<@" + UserID + ">* do you want to start a game of hangman?\n{ars:HSniffer}";
@@ -158,9 +194,12 @@ use Battleships;
 use Hangman;
 use Poker;
 use Yahtzee;
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/Games.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
+import "http://77.174.95.206/Scripts/DataObjects.js";
+import "http://77.174.95.206/Scripts/Games.js";
 var Confirmation = "";
 var Game = "";
 var obj = sortObject(MainData);
@@ -202,8 +241,10 @@ HSniffer={init}
 {arslock}
 {sleep:1m}
 #js >>
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
-import "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/VariableManipulation.js";
+// "https://raw.githubusercontent.com/JurrijnP/Echonia/master/Scripts/DataObjects.js";
+import "http://77.174.95.206/Scripts/VariableManipulation.js";
+import "http://77.174.95.206/Scripts/DataObjects.js";
 use MainData;
 if (prs(MainData["Hangman"])["Temp"] !== "") {
 	resp = "";
