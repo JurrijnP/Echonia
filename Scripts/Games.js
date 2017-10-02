@@ -45,6 +45,57 @@ function wordChecker(Word) {
 };
 
 function invite(RawID, MentionID, Params) {
+	var msg = "{del}";
+	var Game = Params;
+	if (RawID !== MentionID) {
+		if (Echonia[MentionID]) {
+			if (prs(Echonia[MentionID])["City"] === "Sanctuary Halls") {
+				if (prs(MainData[Game])["Game"] === true) {
+					if (Game === "Hangman") {
+						if (Hangman["Chooser"] === RawID) {
+							if (prs(MainData["Hangman"])["Players"] < 8) {
+								msg += "{msg:*<@" + RawID + ">* you have succesfully created an invite for *<@" + MentionID + ">* to play a game of " + Game + ".}" + createInvite(RawID, MentionID, Game) + "\n{ars:inviteSniffer}";
+								var invite = {
+									"User": MentionID,
+									"Game": Game;
+								};
+								Invite[MentionID] = str(invite);
+							} else {
+								msg += "You already invited 7 other people.";
+							}
+						}
+					}
+				}
+			} else {
+				msg += "*<@" + MentionID + ">* has not travelled to Sanctuary Halls yet.";
+			}
+		} else {
+			msg += "*<@" + MentionID + ">* was not found in the main database.";
+		}
+	} else {
+		msg += "You did not mention anybody.";
+	}
+	return msg;
+};
 
-	
+function createInvite(RawID, MentionID, Game) {
+	var msg = "{redirect:364380344847433738}";
+	var Color = {
+		"Hangman": "#0000BB",
+		"Battleships": "#CC0000",
+		"Poker": "#DD00DD",
+		"Yahtzee": "#00DD00"
+	}
+	msg += "{embed:\n\
+{type:rich}\n\
+{color:" + Color[Game] + "}\n\
+{title:Invite for: " + Game + "}\n\
+{desc:\
+You have been invited to play Hangman!\n\
+Type `e?invite Hangman accept` or `e?invite Hangman cancel` to accept/cancel your invitation.\n\n\
+This invitation will expire in 2 minutes.\n\
+*<@" + MentionID + ">*\n\
+}\n\
+}";
+	return msg;
 };
