@@ -45,7 +45,6 @@ function wordChecker(Word) {
 };
 
 function invite(RawID, MentionID, Params) {
-<<<<<<< HEAD
 	var msg = "{del}";
 	var Game = Params;
 	if (RawID !== MentionID) {
@@ -99,30 +98,4 @@ This invitation will expire in 2 minutes.\n\
 }\n\
 }";
 	return msg;
-=======
-	var Games = ["Hangman", "Poker", "Battleships", "Yahtzee"];
-	var Game = "";
-	var msg = "";
-	if (Params in Games) {
-		Game = Params;
-		if (prs(Maindata[Game])["Game"] === true) {
-			if (Game === "Hangman") {
-				if (Hangman["Chooser"] === RawID) {
-					if (Hangman["Players"] < 8) {
-						msg = "You have succesfully invited *<@" + MentionID + ">* for a game of " + Game + ".\nThe invitation will expire after 1 minute.\n{ars:sendInvite}";
-					} else {
-						msg = "You already invited 7 other players.";
-					}
-				} else {
-					msg = "{del}";
-				}
-			}
-		} else {
-			msg = "{del}";
-		}
-	} else {
-		msg = "That game was not found please try again.";
-	}
-	return msg;
->>>>>>> a59778b20f368c9de0cf5c421bed6c8f11c804f7
 };
